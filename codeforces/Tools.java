@@ -6,6 +6,17 @@ public class Tools{
     static final int MOD=1000000007;
     static int ncr[][]=new int[MAX][MAX];
     static int fact[]=new int[MAX];
+    private static class P implements Comparable<P>{
+        int x,y;
+        public P(int x,int y){
+            this.x=x;
+            this.y=y;
+        }
+        public int compareTo(P p){
+            if(x<p.x) return -1;
+            else return 1;
+        }
+    }
     public static boolean isPrime(int n){
         BigInteger b=new BigInteger(Integer.toString(n));
         return b.isProbablePrime(10);
