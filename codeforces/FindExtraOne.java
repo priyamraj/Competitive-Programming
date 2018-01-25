@@ -12,8 +12,8 @@ public class FindExtraOne{
             if(x<0) left++;
             else if(x>0) right++;
         }
-        if(left==1 && right>1) System.out.println("Yes");
-        else if(left>1 && right==1) System.out.println("Yes");
+        if(left==1 && right>=1) System.out.println("Yes");
+        else if(left>=1 && right==1) System.out.println("Yes");
         else if(left==0 && right>=1) System.out.println("Yes");
         else if(left>=1 && right==0) System.out.println("Yes");
         else System.out.println("No");
