@@ -1,36 +1,28 @@
 import java.util.*;
 import java.io.*;
 import java.math.*;
-public class TestMe{
+public class Connected{
     static int n,m,ans=0;
     static ArrayList<Integer> vals=new ArrayList<>();
     static HashMap<Integer,HashSet<Integer>> hs=new HashMap<>();
     static HashSet<Integer> unmarked=new HashSet<>();
-    
-    public static void bfs(int v){
+    public static void dfs(int v){
       if(!unmarked.contains(v)) return;
-      ArrayDeque<Integer> q=new ArrayDeque<>();
-      q.addLast(v);
+      unmarked.remove(v);
+      ans++;
 
-      while(!q.isEmpty()){
-        int f=q.pollFirst();
-        if(!unmarked.contains(f)){
-          continue;
-        }
-        unmarked.remove(f);
-        ans++;
-        ArrayList<Integer> temp=new ArrayList<>();
-        Iterator<Integer> it=unmarked.iterator();
-        while(it.hasNext()){
-          int k=it.next();
-          if(!(hs.get(f).contains(k)))
-            {q.addLast(k);temp.add(k);}
-        }//iterator
-      for(Integer x:temp)
-        unmarked.remove(x);
+      Object arr[]=unmarked.toArray();
+      for(Object x:arr){
+        int el=(Integer) x;
+        if(!(hs.get(v).contains(el)))
+          dfs(el);
       }
-
-
+      // Iterator<Integer> it=unmarked.iterator();
+      // while(it.hasNext()){
+      //   int el=it.next();
+      //   if(!(hs.get(v).contains(el)))
+      //     dfs(el);
+      // }
     }
 
     public static void main(String[] args) {
@@ -50,7 +42,7 @@ public class TestMe{
         int cons=0;
         for(int i=1;i<=n;i++){
           if(!unmarked.contains(i)) continue;
-          bfs(i);
+          dfs(i);
           cons++;
           vals.add(ans);
           ans=0;
@@ -95,12 +87,12 @@ public class TestMe{
 
       String nextLine(){
           String str = "";
-    try {
-       str = br.readLine();
-    } catch (IOException e) {
-       e.printStackTrace();
-    }
-    return str;
+	  try {
+	     str = br.readLine();
+	  } catch (IOException e) {
+	     e.printStackTrace();
+	  }
+	  return str;
       }
    }
 }
