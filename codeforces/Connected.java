@@ -5,24 +5,20 @@ public class Connected{
     static int n,m,ans=0;
     static ArrayList<Integer> vals=new ArrayList<>();
     static HashMap<Integer,HashSet<Integer>> hs=new HashMap<>();
-    static HashSet<Integer> unmarked=new HashSet<>();
-    public static void dfs(int v){
-      if(!unmarked.contains(v)) return;
-      unmarked.remove(v);
-      ans++;
+    static TreeSet<Integer> ts=new TreeSet<>();
+    public static int dfs(int v){
+      int ans=1;
+      ArrayList<Integer> temp=new ArrayList<>();
+      for(Integer x:ts)
+        if(!hs.get(v).contains(x))
+          temp.add(x);
 
-      Object arr[]=unmarked.toArray();
-      for(Object x:arr){
-        int el=(Integer) x;
-        if(!(hs.get(v).contains(el)))
-          dfs(el);
-      }
-      // Iterator<Integer> it=unmarked.iterator();
-      // while(it.hasNext()){
-      //   int el=it.next();
-      //   if(!(hs.get(v).contains(el)))
-      //     dfs(el);
-      // }
+        for(Integer x:temp)
+          ts.remove(x);
+
+        for(Integer x:temp)
+          ans+=dfs(x);
+        return ans;
     }
 
     public static void main(String[] args) {
@@ -31,7 +27,7 @@ public class Connected{
         m=sc.nextInt();
         for(int i=1;i<=n;i++){
           hs.put(i,new HashSet<Integer>());
-          unmarked.add(i);
+          ts.add(i);
         }
         for(int i=0;i<m;i++){
           int v1=sc.nextInt();
@@ -40,12 +36,9 @@ public class Connected{
           hs.get(v2).add(v1);
         }
         int cons=0;
-        for(int i=1;i<=n;i++){
-          if(!unmarked.contains(i)) continue;
-          dfs(i);
+        while(!ts.isEmpty()){
           cons++;
-          vals.add(ans);
-          ans=0;
+          vals.add(dfs(ts.pollFirst()));
         }
         System.out.println(cons);
         vals.sort(null);
@@ -87,12 +80,12 @@ public class Connected{
 
       String nextLine(){
           String str = "";
-	  try {
-	     str = br.readLine();
-	  } catch (IOException e) {
-	     e.printStackTrace();
-	  }
-	  return str;
+    try {
+       str = br.readLine();
+    } catch (IOException e) {
+       e.printStackTrace();
+    }
+    return str;
       }
    }
 }
