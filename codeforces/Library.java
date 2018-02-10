@@ -1,23 +1,25 @@
 import java.util.*;
 import java.io.*;
 import java.math.*;
-public class HungrySequence{
-    static int max=10000007;
+public class Library{
     public static void main(String[] args) {
         MyScanner sc=new MyScanner();
-        int n=sc.nextInt();
-        ArrayList<Integer> arr=new ArrayList<>();
-        int s[]=new int[max];
-        for(int i=2;i*i<=max;i++){
-            if(s[i]==0){
-                arr.add(i);
-                for(int j=i*2;j*j<=max;j+=i)
-                    s[j]=1;
-            }
-        }//end of i
-        for(int i=0;i<n;i++)
-            System.out.print(arr.get(i)+" ");
+        int t=sc.nextInt();
+        HashSet<Integer> hs=new HashSet<>();
+        int max=0;
+        while(t-->0){
+          char ch=(sc.next()).charAt(0);
+          int sign = (ch=='+')?1:-1;
+          int num=sc.nextInt();
+          num*=sign;
+          if(num<0 && !hs.contains(-1*num)) max++;
+          else if(num<0 && hs.contains(-1*num)) hs.remove(-1*num);
+          else if(num>0) hs.add(num);
+          max=Math.max(max,hs.size());
+        }   
+        System.out.println(max);
     }
+
 
     private static class MyScanner {
       BufferedReader br;

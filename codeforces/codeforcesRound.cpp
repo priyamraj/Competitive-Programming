@@ -16,14 +16,22 @@
 #define endl "\n"
 using namespace std;
 typedef long long ll;
+inline bool isTri(int a,int b,int c){
+ if(a+b>c && a+c>b && b+c>a)
+      return true;
+    return false;
+}
 int main(){
+    int n,ans=0;;
 	ios_base::sync_with_stdio(0); cin.tie(0);cout.tie(0);
-    int a,b,c,x,y,z;
-    cin>>a>>b>>c>>x>>y>>z;
-    int p=max(a-x,0)/2 + max(b-y,0)/2 + max(c-z,0)/2;
-    int n=max(x-a,0) + max(y-b,0) + max(z-c,0);
-    if(p>=n) cout << "Yes";
-    else cout << "No";
+	cin >> n;
+	for(int i=1;i<=n;i++){
+        for(int j=i;j<=n;j++){
+            int k=i^j;
+            if(isTri(i,j,k) && k<=n && k>=j)
+                ans++;
+        }
+	}
+	cout << ans;
 	return 0 ;
 }
-

@@ -1,23 +1,26 @@
 import java.util.*;
 import java.io.*;
 import java.math.*;
-public class HungrySequence{
-    static int max=10000007;
+public class CavePainting{
     public static void main(String[] args) {
         MyScanner sc=new MyScanner();
-        int n=sc.nextInt();
-        ArrayList<Integer> arr=new ArrayList<>();
-        int s[]=new int[max];
-        for(int i=2;i*i<=max;i++){
-            if(s[i]==0){
-                arr.add(i);
-                for(int j=i*2;j*j<=max;j+=i)
-                    s[j]=1;
-            }
-        }//end of i
-        for(int i=0;i<n;i++)
-            System.out.print(arr.get(i)+" ");
+        // long p=1, lim=(long)Math.pow(10,18);
+        // System.out.println(lim);
+        // for(int i=1;;i++){
+        //   p*=i;
+        //   if(p>lim){System.out.println(i);break;}
+        // }
+        long n=sc.nextLong();
+        long k=sc.nextLong();
+        HashSet<Long> hs=new HashSet<>();
+        for(long i=1;i<=k;i++){
+          long v=n%k;
+          if(hs.contains(v)){System.out.println("No");System.exit(0);}
+          hs.add(v);
+        }
+        System.out.println("Yes");
     }
+
 
     private static class MyScanner {
       BufferedReader br;

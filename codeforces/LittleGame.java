@@ -1,23 +1,23 @@
 import java.util.*;
 import java.io.*;
 import java.math.*;
-public class HungrySequence{
-    static int max=10000007;
+public class LittleGame{
     public static void main(String[] args) {
         MyScanner sc=new MyScanner();
-        int n=sc.nextInt();
-        ArrayList<Integer> arr=new ArrayList<>();
-        int s[]=new int[max];
-        for(int i=2;i*i<=max;i++){
-            if(s[i]==0){
-                arr.add(i);
-                for(int j=i*2;j*j<=max;j+=i)
-                    s[j]=1;
-            }
-        }//end of i
-        for(int i=0;i<n;i++)
-            System.out.print(arr.get(i)+" ");
+        String s=sc.next();
+        int c[]=new int[26];
+        for(int i=0;i<s.length();i++){
+          char ch=s.charAt(i);
+          c[ch-'a']++;
+        }
+        int ans=0;
+        for(Integer x:c){
+          if(x%2==1) ans++;
+        }
+        if(ans==0 || ans%2 == 1) System.out.println("First");
+        else System.out.println("Second");
     }
+
 
     private static class MyScanner {
       BufferedReader br;
@@ -52,12 +52,12 @@ public class HungrySequence{
 
       String nextLine(){
           String str = "";
-	  try {
-	     str = br.readLine();
-	  } catch (IOException e) {
-	     e.printStackTrace();
-	  }
-	  return str;
+    try {
+       str = br.readLine();
+    } catch (IOException e) {
+       e.printStackTrace();
+    }
+    return str;
       }
    }
 }

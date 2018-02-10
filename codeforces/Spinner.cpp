@@ -18,12 +18,26 @@ using namespace std;
 typedef long long ll;
 int main(){
 	ios_base::sync_with_stdio(0); cin.tie(0);cout.tie(0);
-    int a,b,c,x,y,z;
-    cin>>a>>b>>c>>x>>y>>z;
-    int p=max(a-x,0)/2 + max(b-y,0)/2 + max(c-z,0)/2;
-    int n=max(x-a,0) + max(y-b,0) + max(z-c,0);
-    if(p>=n) cout << "Yes";
-    else cout << "No";
+	map<char,int> mp;
+	mp['v']=0;
+	mp['<']=1;
+	mp['^']=2;
+	mp['>']=3;
+	char arr[]={'v','<','^','>'};
+	char st,en;
+	cin >> st >> en;
+	int n;
+	cin >> n;
+	n=n%4;
+	int cw=(mp[st]+n)%4;
+	char pcw=arr[cw];
+	int ccw=(mp[st]-n);
+	if(ccw<0) ccw+=4;
+	char pccw=arr[ccw];
+
+	if(en==pcw && en!=pccw) cout << "cw";
+	else if(en==pccw && en!=pcw) cout << "ccw";
+	else cout << "undefined";
 	return 0 ;
 }
 

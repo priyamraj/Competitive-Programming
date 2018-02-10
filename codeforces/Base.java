@@ -1,23 +1,33 @@
 import java.util.*;
 import java.io.*;
 import java.math.*;
-public class HungrySequence{
-    static int max=10000007;
+public class Base{
     public static void main(String[] args) {
         MyScanner sc=new MyScanner();
-        int n=sc.nextInt();
-        ArrayList<Integer> arr=new ArrayList<>();
-        int s[]=new int[max];
-        for(int i=2;i*i<=max;i++){
-            if(s[i]==0){
-                arr.add(i);
-                for(int j=i*2;j*j<=max;j+=i)
-                    s[j]=1;
-            }
-        }//end of i
-        for(int i=0;i<n;i++)
-            System.out.print(arr.get(i)+" ");
+        long v1=0,v2=0;
+        int x=sc.nextInt();
+        int arr[]=new int[x];
+        int bx=sc.nextInt();
+        long init=1;
+        for(int i=0;i<x;i++) arr[i]=sc.nextInt();
+        for(int i=x-1;i>=0;i--){
+          v1+=arr[i]*init;
+          init*=bx;
+        }
+        int y=sc.nextInt();
+        int by=sc.nextInt();
+        int brr[]=new int[y];
+        init=1;
+        for(int i=0;i<y;i++) brr[i]=sc.nextInt();
+        for(int i=y-1;i>=0;i--){
+          v2+=brr[i]*init;
+          init*=by;
+        }        
+        if(v1>v2) System.out.println(">");
+        else if(v1==v2) System.out.println("=");
+        else System.out.println("<");
     }
+
 
     private static class MyScanner {
       BufferedReader br;

@@ -18,12 +18,18 @@ using namespace std;
 typedef long long ll;
 int main(){
 	ios_base::sync_with_stdio(0); cin.tie(0);cout.tie(0);
-    int a,b,c,x,y,z;
-    cin>>a>>b>>c>>x>>y>>z;
-    int p=max(a-x,0)/2 + max(b-y,0)/2 + max(c-z,0)/2;
-    int n=max(x-a,0) + max(y-b,0) + max(z-c,0);
-    if(p>=n) cout << "Yes";
-    else cout << "No";
+	int n;
+	cin>>n;
+	// number of moves accrued from any no. are n-1. check by drawing trees
+	ll suf[n];
+	for(int i=0;i<n;i++)
+        {cin>>suf[i];suf[i]--;}
+    for(int i=1;i<n;i++)
+      suf[i]+=suf[i-1];
+    for(int i=0;i<n;i++){
+        if((suf[i]&1)==0) cout << 2;
+        else cout << 1;
+        cout << endl;
+    }
 	return 0 ;
 }
-
