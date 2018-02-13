@@ -1,22 +1,45 @@
 import java.util.*;
 import java.io.*;
 import java.math.*;
-public class Prog{
+public class Dishonest{
+    private static class Tri implements Comparable<Tri>{
+        int after,now,profit;
+        public Tri(int after,int now,int profit){
+            this.after=after;
+            this.now=now;
+            this.profit=profit;
+        }
+        public int compareTo(Tri T){
+            return T.profit-this.profit;
+        }
+    }
     public static void main(String[] args) {
         MyScanner sc=new MyScanner();
         int n=sc.nextInt();
-        HashMap<String,Integer> hs=new HashMap<>();
-        while(n-->0){
-            String s=sc.next();
-            if(!hs.containsKey(s)){
-                hs.put(s,0);
-                System.out.println("OK");
-            }
-            else{
-                hs.put(s,hs.get(s)+1);
-                System.out.println(s+""+hs.get(s));
-            }
-        }//end of while
+        int k=sc.nextInt();
+        int t[]=new int[n];
+        Tri arr[]=new Tri[n];
+        for(int i=0;i<n;i++) t[i]=sc.nextInt(); // right now
+        for(int i=0;i<n;i++){
+            int v=sc.nextInt(); // after discount
+            int p=v-t[i];
+            arr[i]=new Tri(v,t[i],p);
+        }
+        Arrays.sort(arr);
+        HashSet<Integer> mark=new HashSet<>();
+        long ans=0;
+        int temp=0;
+        for(int i=0;i<n;i++){
+            if(arr[i].profit<0 && temp>=k) break;
+            ans+=arr[i].now;
+            mark.add(i);
+            temp++;
+        }
+        for(int i=0;i<n;i++){
+            if(!mark.contains(i))
+                ans+=arr[i].after;
+        }
+        System.out.println(ans);
     }
 
 

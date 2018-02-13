@@ -1,22 +1,19 @@
 import java.util.*;
 import java.io.*;
 import java.math.*;
-public class Prog{
+public class FlipCards{
     public static void main(String[] args) {
         MyScanner sc=new MyScanner();
-        int n=sc.nextInt();
-        HashMap<String,Integer> hs=new HashMap<>();
-        while(n-->0){
-            String s=sc.next();
-            if(!hs.containsKey(s)){
-                hs.put(s,0);
-                System.out.println("OK");
-            }
-            else{
-                hs.put(s,hs.get(s)+1);
-                System.out.println(s+""+hs.get(s));
-            }
-        }//end of while
+        String s=sc.next();
+        int ans=0;
+        for(int i=0;i<s.length();i++){
+           char ch=s.charAt(i);
+           if(ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u')
+            ans++;
+           if(ch=='1'||ch=='3'||ch=='5'||ch=='7'||ch=='9')
+            ans++;
+        }
+        System.out.println(ans);
     }
 
 

@@ -1,22 +1,33 @@
 import java.util.*;
 import java.io.*;
 import java.math.*;
-public class Prog{
+public class PrimeGame{
+    static int max=1007;
+    public static boolean isPrime(int n){
+        BigInteger b=new BigInteger(Integer.toString(n));
+        return b.isProbablePrime(10);
+    }
     public static void main(String[] args) {
         MyScanner sc=new MyScanner();
+        ArrayList<Integer> p=new ArrayList<>();
+        for(int i=2;i<=max;i++){
+            if(isPrime(i))
+                p.add(i);
+        }
+        ArrayList<Integer> ans=new ArrayList<>();
         int n=sc.nextInt();
-        HashMap<String,Integer> hs=new HashMap<>();
-        while(n-->0){
-            String s=sc.next();
-            if(!hs.containsKey(s)){
-                hs.put(s,0);
-                System.out.println("OK");
+        for(int i=0;i<p.size();i++){
+            int prime=p.get(i);
+            if(prime>n) break;
+            int t=prime;
+            while(t<=n){
+                ans.add(t);
+                t*=prime;
             }
-            else{
-                hs.put(s,hs.get(s)+1);
-                System.out.println(s+""+hs.get(s));
-            }
-        }//end of while
+        }
+        System.out.println(ans.size());
+        for(Integer x:ans)
+            System.out.print(x+" ");
     }
 
 

@@ -1,22 +1,29 @@
 import java.util.*;
 import java.io.*;
 import java.math.*;
-public class Prog{
+public class LetterShift{
     public static void main(String[] args) {
         MyScanner sc=new MyScanner();
-        int n=sc.nextInt();
-        HashMap<String,Integer> hs=new HashMap<>();
-        while(n-->0){
-            String s=sc.next();
-            if(!hs.containsKey(s)){
-                hs.put(s,0);
-                System.out.println("OK");
-            }
-            else{
-                hs.put(s,hs.get(s)+1);
-                System.out.println(s+""+hs.get(s));
-            }
-        }//end of while
+        char arr[]=(sc.next()).toCharArray();
+        int L=arr.length;
+        int i=0;
+        StringBuilder str=new StringBuilder();
+        boolean b=false;
+        while(i<L){
+            if(arr[i]=='a'){i++;str.append('a');continue;}
+            if(b){str.append(arr[i]);i++;continue;}
+            while(i<L && arr[i]!='a'){
+                char prev=(char)(arr[i]-1);
+                str.append(prev);
+                i++;
+                b=true;
+            } // end of inner while
+        } // end of outer while
+        if(b) System.out.println(str);
+        else{
+            String s=str.substring(0,str.length()-1)+"z";
+            System.out.println(s);
+        }
     }
 
 

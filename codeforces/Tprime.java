@@ -1,22 +1,32 @@
 import java.util.*;
 import java.io.*;
 import java.math.*;
-public class Prog{
+public class Tprime{
+    static final int max=1000007;
+    static int sieve[]=new int[max];
+    public static void create(){
+        for(int i=3;i<max;i+=2) sieve[i]=1;
+        sieve[2]=1;
+        for(int i=3;i*i<max;i+=2){
+            for(int j=i*i;j<max;j=j+i+i)
+                sieve[j]=0;
+        }
+    }
     public static void main(String[] args) {
         MyScanner sc=new MyScanner();
+        create();
         int n=sc.nextInt();
-        HashMap<String,Integer> hs=new HashMap<>();
         while(n-->0){
-            String s=sc.next();
-            if(!hs.containsKey(s)){
-                hs.put(s,0);
-                System.out.println("OK");
+            long v=sc.nextLong();
+            double sq=Math.sqrt(v);
+            if(Math.ceil(sq)!=Math.floor(sq)){
+                System.out.println("NO");
+                continue;
             }
-            else{
-                hs.put(s,hs.get(s)+1);
-                System.out.println(s+""+hs.get(s));
-            }
-        }//end of while
+            int s=(int)sq;
+            if(sieve[s]==1) System.out.println("YES");
+            else System.out.println("NO");
+        }
     }
 
 
